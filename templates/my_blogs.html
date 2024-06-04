@@ -1,0 +1,65 @@
+{% include "header.html" %}
+
+<!-- Page Header-->
+<header
+  class="masthead"
+  style="background-image: url('../static/assets/img/register-bg.jpg')"
+>
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1>My Blogs</h1>
+          <span class="subheading">A list of blogs created by you</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+      <!-- Post preview-->
+        {% if all_posts: %}
+            {% for post in all_posts %}
+            <div class="post-preview">
+                <a href="{{ url_for('show_post', post_id=post.id) }}">
+                <h2 class="post-title">{{ post.title }}</h2>
+                <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+                </a>
+                <p class="post-meta">
+                Posted by
+                <!-- post.author.name is now a User object -->
+                <a href="#">{{post.author.name}}</a>
+                on {{post.date}}
+                <!-- Only show delete button if user id is 6 (admin user) -->
+                {% if post.author.id == current_user.id or current_user.id == 6: %}
+                <a href="{{url_for('delete_post', post_id=post.id) }}">✘</a>
+                <div class="d-flex justify-content-end mb-4">
+                    <a class="btn btn-primary float-right" href="{{ url_for('edit_post', post_id=post.id) }}">Edit Post</a>
+                </div>
+                {% endif %}
+                </p>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+            {% endfor %}
+        {% else: %}
+            <p>It seems you haven't shared any stories yet.Start your writing journey now! ❤️✒️</p>
+        {% endif %}
+      <!-- New Post -->
+      <!-- Only show Create Post button if user id is 6 (admin user) -->
+      
+      <div class="d-flex justify-content-end mb-4">
+        <a
+          class="btn btn-primary float-right"
+          href="{{url_for('add_new_post')}}"
+          >Create New Post</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include "footer.html" %}
