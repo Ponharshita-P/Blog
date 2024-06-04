@@ -12,8 +12,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 # Import your forms from the forms.py
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
 import smtplib
 from email.mime.text import MIMEText
 import os
