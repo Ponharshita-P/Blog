@@ -15,7 +15,6 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 import smtplib
 from email.mime.text import MIMEText
 import os
-from dotenv import find_dotenv, load_dotenv
 
 OWN_EMAIL = "harshitasblog@gmail.com"
 OWN_PASSWORD = "vfxj fsay khmb qcvp"
