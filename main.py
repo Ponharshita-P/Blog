@@ -112,8 +112,8 @@ with app.app_context():
 def admin_only(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        # If id is not 6 then return abort with 403 error
-        if current_user.id != 6:
+        # If id is not 1 then return abort with 403 error
+        if current_user.id != 1:
             return abort(403)
         # Otherwise continue with the route function
         return f(*args, **kwargs)
@@ -260,7 +260,7 @@ def add_new_post():
 def edit_post(post_id):
     post = db.get_or_404(BlogPost, post_id)
     # If current user is not the author and not an admin, abort with 403 error
-    if current_user.id != post.author.id and current_user.id != 6:
+    if current_user.id != post.author.id and current_user.id != 1:
         return abort(403)
     else:
         edit_form = CreatePostForm(
@@ -285,7 +285,7 @@ def edit_post(post_id):
 def delete_post(post_id):
     post = db.get_or_404(BlogPost, post_id)
     # If current user is not the author and not an admin, abort with 403 error
-    if current_user.id != post.author.id and current_user.id != 6:
+    if current_user.id != post.author.id and current_user.id != 1:
         return abort(403)
     else:
         db.session.delete(post)
